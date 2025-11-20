@@ -264,7 +264,20 @@ section {
     padding: 100px 16px 60px;
   }
 
+  /* Hide the notebook margin line on small screens */
+  .notebook-line {
+    display: none;
+  }
+
+  /* Center main content on small screens */
+  .notebook-content {
+    padding-left: 0;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
   .about-layout {
+    padding-left: 0;
     flex-direction: column;
     align-items: center;
   }

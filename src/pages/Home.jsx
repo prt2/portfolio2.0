@@ -215,6 +215,19 @@ export default function Home() {
   const isEmail = c.platform.toLowerCase() === "email";
   const email = isEmail ? c.url.replace("mailto:", "") : null;
 
+  // Use a direct LinkedIn URL if wrapped (e.g. pal-tilva.vercel.app/...)
+  let hrefUrl = c.url;
+  if (!isEmail) {
+    const rawUrl = c.url;
+    const linkedinIndex = rawUrl.indexOf("linkedin.com");
+    if (linkedinIndex !== -1) {
+      hrefUrl = `https://${rawUrl.slice(linkedinIndex)}`;
+    }
+  }
+
+  // Clean display text for non-email links
+  let displayUrl = hrefUrl.replace(/^https?:\/\//, "");
+
   return (
     <div key={c.id} className="contact-row">
       <img
@@ -235,12 +248,12 @@ export default function Home() {
           </a>
         ) : (
           <a
-            href={c.url}
+            href={hrefUrl}
             target="_blank"
             rel="noreferrer"
             className="contact-link"
           >
-            {c.url.replace(/^https?:\/\//, "")}
+            {displayUrl}
           </a>
         )}
       </div>
